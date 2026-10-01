@@ -1,0 +1,67 @@
+{
+  "scope": "executed_synthetic_metadata_only_no_pixels_or_detector",
+  "supported": {
+    "disclosure": "Reconstructed Public Demo",
+    "vision_model": "mock_metadata_only",
+    "narration": "template_not_llm",
+    "diagnosis": false,
+    "evidence": [
+      "synthetic-guide-a"
+    ],
+    "claims": [
+      {
+        "text": "Inspect the fictional sample under consistent lighting.",
+        "evidence_id": "synthetic-guide-a"
+      }
+    ],
+    "status": "supported_candidate",
+    "candidate": {
+      "entity": "pattern-a",
+      "score": 0.88,
+      "source": "synthetic_detector"
+    },
+    "message": "A fictional candidate with supporting sample knowledge, not a confirmed diagnosis."
+  },
+  "ambiguous": {
+    "disclosure": "Reconstructed Public Demo",
+    "vision_model": "mock_metadata_only",
+    "narration": "template_not_llm",
+    "diagnosis": false,
+    "evidence": [],
+    "claims": [],
+    "status": "ambiguous",
+    "message": "Multiple candidates require review.",
+    "candidates": [
+      {
+        "entity": "pattern-a",
+        "score": 0.8,
+        "source": "synthetic_detector"
+      },
+      {
+        "entity": "pattern-b",
+        "score": 0.76,
+        "source": "synthetic_detector"
+      }
+    ]
+  },
+  "service_error": {
+    "disclosure": "Reconstructed Public Demo",
+    "vision_model": "mock_metadata_only",
+    "narration": "template_not_llm",
+    "diagnosis": false,
+    "evidence": [],
+    "claims": [],
+    "status": "service_error",
+    "message": "Inference unavailable; not a negative finding."
+  },
+  "knowledge_missing": {
+    "disclosure": "Reconstructed Public Demo",
+    "vision_model": "mock_metadata_only",
+    "narration": "template_not_llm",
+    "diagnosis": false,
+    "evidence": [],
+    "claims": [],
+    "status": "knowledge_missing",
+    "message": "No matching reference; no invented recommendation."
+  }
+}
