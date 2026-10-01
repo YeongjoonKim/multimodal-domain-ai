@@ -1,0 +1,57 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src &apos;none&apos;; style-src &apos;unsafe-inline&apos;; base-uri &apos;none&apos;; form-action &apos;none&apos;"><title>Multimodal · Execution Evidence</title><style>body{margin:0;background:#eff3f7;color:#183349;font:16px system-ui,sans-serif}main{max-width:1160px;margin:30px auto;padding:0 24px}section{background:white;padding:28px;margin:24px 0;border:1px solid #cbd5df;border-radius:12px}h1{font-size:28px}h2{font-size:25px}.scope{color:#147863;font-size:12px;font-weight:700;letter-spacing:1px}.limit{font-size:13px;color:#546478}pre{font:14px/1.5 monospace;white-space:pre-wrap;overflow-wrap:anywhere}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}article{padding:15px;background:#f3f6f9;border-radius:8px}table{width:100%;border-collapse:collapse}td,th{padding:12px 6px;text-align:left;border-bottom:1px solid #d8e0e8;font-size:13px}@media(max-width:700px){.cards{grid-template-columns:1fr}table{display:block;overflow:auto}}</style><main><h1>Multimodal · Execution Evidence</h1><p>Reconstructed Public Example · Python 실행 결과를 렌더링한 검토 문서</p><section id="candidate"><p class="scope">EXECUTED PUBLIC SAMPLE · SYNTHETIC</p><h2>Candidate and evidence</h2><p>합성 detector metadata를 실제 해석했습니다. 픽셀 추론이나 병해 진단 결과가 아닙니다.</p><pre>{
+  &quot;vision_model&quot;: &quot;mock_metadata_only&quot;,
+  &quot;candidate&quot;: {
+    &quot;entity&quot;: &quot;pattern-a&quot;,
+    &quot;score&quot;: 0.88,
+    &quot;source&quot;: &quot;synthetic_detector&quot;
+  },
+  &quot;evidence&quot;: [
+    &quot;synthetic-guide-a&quot;
+  ],
+  &quot;claims&quot;: [
+    {
+      &quot;text&quot;: &quot;Inspect the fictional sample under consistent lighting.&quot;,
+      &quot;evidence_id&quot;: &quot;synthetic-guide-a&quot;
+    }
+  ],
+  &quot;diagnosis&quot;: false
+}</pre><p class="limit">운영 데이터·실시간 API·모델 성능의 증거가 아닙니다.</p></section><section id="boundary"><p class="scope">EXECUTED PUBLIC SAMPLE · SYNTHETIC</p><h2>Uncertainty and response boundary</h2><p>모호한 후보·도구 오류·지식 부재를 다른 상태로 반환합니다.</p><div class="cards"><article><h3>ambiguous</h3><pre>{
+  &quot;disclosure&quot;: &quot;Reconstructed Public Demo&quot;,
+  &quot;vision_model&quot;: &quot;mock_metadata_only&quot;,
+  &quot;narration&quot;: &quot;template_not_llm&quot;,
+  &quot;diagnosis&quot;: false,
+  &quot;evidence&quot;: [],
+  &quot;claims&quot;: [],
+  &quot;status&quot;: &quot;ambiguous&quot;,
+  &quot;message&quot;: &quot;Multiple candidates require review.&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;entity&quot;: &quot;pattern-a&quot;,
+      &quot;score&quot;: 0.8,
+      &quot;source&quot;: &quot;synthetic_detector&quot;
+    },
+    {
+      &quot;entity&quot;: &quot;pattern-b&quot;,
+      &quot;score&quot;: 0.76,
+      &quot;source&quot;: &quot;synthetic_detector&quot;
+    }
+  ]
+}</pre></article><article><h3>service_error</h3><pre>{
+  &quot;disclosure&quot;: &quot;Reconstructed Public Demo&quot;,
+  &quot;vision_model&quot;: &quot;mock_metadata_only&quot;,
+  &quot;narration&quot;: &quot;template_not_llm&quot;,
+  &quot;diagnosis&quot;: false,
+  &quot;evidence&quot;: [],
+  &quot;claims&quot;: [],
+  &quot;status&quot;: &quot;service_error&quot;,
+  &quot;message&quot;: &quot;Inference unavailable; not a negative finding.&quot;
+}</pre></article><article><h3>knowledge_missing</h3><pre>{
+  &quot;disclosure&quot;: &quot;Reconstructed Public Demo&quot;,
+  &quot;vision_model&quot;: &quot;mock_metadata_only&quot;,
+  &quot;narration&quot;: &quot;template_not_llm&quot;,
+  &quot;diagnosis&quot;: false,
+  &quot;evidence&quot;: [],
+  &quot;claims&quot;: [],
+  &quot;status&quot;: &quot;knowledge_missing&quot;,
+  &quot;message&quot;: &quot;No matching reference; no invented recommendation.&quot;
+}</pre></article></div><p class="limit">운영 데이터·실시간 API·모델 성능의 증거가 아닙니다.</p></section></main></html>
