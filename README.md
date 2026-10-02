@@ -10,8 +10,6 @@
 공식 등록정보 검색을 거쳐 상담 근거로 전달하는 파이프라인을 구현했습니다.
 이미지 모델의 후보와 약제·사용기준을 설명하는 답변의 책임을 분리했습니다.
 
-![Multimodal architecture](docs/architecture/01_multimodal_architecture.svg)
-
 Image Input → Disease / Pest Inference → Taxonomy Mapping → Structured Knowledge
 → Evidence Context → LLM Consultation → SSE → Diagnosis Card / Answer.
 
@@ -66,6 +64,10 @@ QLoRA VLM 학습·서빙 경로와 현재 YOLO 기반 상담 진단 경로는 �
 학습 lifecycle은 [Fine-tuning Lab](https://github.com/YeongjoonKim/efficient-finetuning-lab)에서 다룹니다.
 
 ## Public Reference Implementation & Lightweight Demo
+
+아래 기존 도식의 모델·연결 상태는 공개 metadata 예제의 범위입니다. 실제 Vision 연결은 위 실행 화면과 대응표에 설명했습니다.
+
+![Public multimodal reference architecture](docs/architecture/01_multimodal_architecture.svg)
 
 | 구분 | 범위 |
 |---|---|
