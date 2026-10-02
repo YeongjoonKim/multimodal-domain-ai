@@ -13,6 +13,18 @@
 Image Input → Disease / Pest Inference → Taxonomy Mapping → Structured Knowledge
 → Evidence Context → LLM Consultation → SSE → Diagnosis Card / Answer.
 
+## Observed Failure Case
+
+**High model confidence != authoritative domain truth.**
+실제 CPU 추론에서 오이 노균병 라벨 이미지에 정상·토마토 잎곰팡이병 후보가 나왔습니다.
+작물 '모름' 조건의 단일 관측이며 실패를 그대로 보존했습니다. 아래 추론 화면과
+[관측 범위](docs/actual-engineering.md)는 진단 성공률이나 독립 detector benchmark가 아닙니다.
+
+`Vision Candidate → Uncertainty → Taxonomy Mapping → Structured Evidence → Domain Verification`
+
+후속 검증은 독립 holdout, OOD, confidence calibration과 근거 일관성 평가입니다.
+사진 후보만으로 확정 진단·처방을 승인하지 않는 것이 이 저장소의 핵심입니다.
+
 ## Actual Consultation Experience
 
 **Purpose** — 사용자가 작물 사진을 첨부하고 질문하면, 상담 화면에서 증상 설명과 단계별 대응 내용을 읽는 실제 사용 흐름을 보여줍니다.
