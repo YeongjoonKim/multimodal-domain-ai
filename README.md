@@ -1,81 +1,83 @@
 # Multimodal Domain AI
 
-### Vision 후보를 Structured Knowledge와 연결하고, 불확실성을 답변에 남기는 설계
-
-Vision × Structured Knowledge × Evidence × LLM
+### Image → YOLO → Structured Evidence → Consultation
 
 [![CI](https://github.com/YeongjoonKim/multimodal-domain-ai/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/YeongjoonKim/multimodal-domain-ai/actions/workflows/ci.yml)
 
-## 문제: 검출 결과는 곧 진단인가
+## Actual Engineering Experience
 
-높은 점수의 시각 후보가 나왔더라도 일치하는 지식이 없으면 근거 있는 권고가 되지 않습니다.
-추론 서비스 오류는 “관측된 이상 없음”과도 다릅니다.
-이 예제는 **후보 → 불확실성 검사 → 구조화 근거 → 응답 상태**의 연결 계약에 집중합니다.
-
-현재 입력은 합성 detector metadata입니다. 이미지 픽셀, 실제 YOLO·LLM·모델 가중치는 실행하지 않습니다.
-실제 이미지 진단 통합 경험을 공개 가능한 작은 예제로 재구성한 것이며 진단 제품을 공개한 것이 아닙니다.
-
-This repository is a sanitized and reconstructed technical showcase based on engineering experience from a private production AI platform.
-It does not contain proprietary source code, private data, internal APIs, or production configuration.
-
-## Architecture
+상담에 첨부된 이미지를 병해·해충 YOLO 도구로 분석하고, 작물·병해충 표준명과
+공식 등록정보 검색을 거쳐 상담 근거로 전달하는 파이프라인을 구현했습니다.
+이미지 모델의 후보와 약제·사용기준을 설명하는 답변의 책임을 분리했습니다.
 
 ![Multimodal architecture](docs/architecture/01_multimodal_architecture.svg)
 
-Reference: Image → Vision Model → Disease / Pest Candidate → Structured Knowledge
-→ Evidence → LLM → Domain Response.
+Image Input → Disease / Pest Inference → Taxonomy Mapping → Structured Knowledge
+→ Evidence Context → LLM Consultation → SSE → Diagnosis Card / Answer.
 
-현재 공개 실행은 가상 `pattern-a / pattern-b` metadata 이후 구간에 한정합니다.
-실제 병해충 이름·확률 교정·농약 처방은 포함하지 않습니다.
+## Actual YOLO Training
 
-## 실행 증거 — Candidate / Knowledge / Response
+**Purpose** — 이미지 진단 모델의 학습 진행과 자원 상태를 확인합니다.
 
-![Executed candidate evidence](docs/screenshots/candidate.png)
+![Actual YOLO training progress supplied by the owner](docs/screenshots/yolo-training-progress.png)
 
-- **무엇을 보여주는가:** 예제 함수가 실제 반환한 후보, knowledge ID, 근거가 연결된 claim.
-- **현재 구현 범위:** 유한 score 검증, 엔티티 중복 제거, 일치하는 가상 지식 조회.
-- **Known Limitation:** detector output을 합성했으며 픽셀 추론·실제 진단 카드가 아닙니다.
-- **Research Relevance:** 후보 confidence와 지식 근거의 충족을 분리해 평가.
+**What this demonstrates** — 사용자가 제공한 실제 YOLO26-X 학습 진행 화면의 epoch, mAP, precision/recall,
+loss 그래프, 로그와 4개 GPU 상태. 완료 결과가 아닌 epoch 75/100 시점의 기록입니다.
+**Architecture relation** — Dataset → Detector Training → Model Selection.
 
-## Failure Handling / 불확실성 전달
+## Actual Vision Execution
 
-![Executed uncertainty boundary](docs/screenshots/boundary.png)
+**Purpose** — 적용 중인 모델로 이미지 한 장을 추론하고 도메인 매핑 결과를 확인합니다.
 
-- **무엇을 보여주는가:** ambiguous / service_error / knowledge_missing의 서로 다른 응답.
-- **현재 구현 범위:** 경쟁 후보가 근접하면 추가 검토, 지식이 없으면 권고를 생성하지 않음.
-- **Known Limitation:** threshold와 margin은 교육용 값이며 calibrated probability가 아닙니다.
-- **Research Relevance:** 불확실성·외부 도구 실패·근거 부족을 답변 단계까지 보존.
+![Actual CPU vision inference result](docs/screenshots/vision-cpu-result.png)
 
-[실제 JSON 출력](examples/execution.json) · [HTML 검토 문서](examples/execution.html) ·
-[화면 범위](docs/screenshots.md). 모두 공개 예제를 실행한 기록이며 운영 관리자 캡처가 아닙니다.
+**What this demonstrates** — 실제 관리자 추론 테스트의 입력 이미지, 검출 후보·score,
+모델 식별자, CPU 처리 시간과 공식 병해충 명칭 연결.
+2026-10-02 실제 CPU 추론 결과입니다. 이 오이 노균병 라벨 샘플에서는 작물 '모름' 조건에서
+정상·토마토 잎곰팡이병 후보가 나왔으므로 **라벨 불일치 관측 사례**로 보존했습니다.
+**Architecture relation** — Image → Model as Tool → Candidate / Domain Mapping.
 
-## Tool Integration / Model Serving / API Design
+## Consultation Integration
 
-| 구성 | 상태 | 공개 구현 |
-|---|---|---|
-| Candidate contract | IMPLEMENTED | entity / finite score / synthetic source |
-| Uncertainty gate | IMPLEMENTED | low score, ambiguity, duplicate, service error |
-| Structured Knowledge | PARTIAL | 두 가상 지식 record; live DB 아님 |
-| Evidence response | IMPLEMENTED | claim과 fixture ID, diagnosis=false |
-| Vision serving / LLM explanation / Upload API | PROPOSED | 모델·픽셀 입력·HTTP service 미포함 |
+| 단계 | 실제 구현 |
+|---|---|
+| Image input | 상담 API가 첨부 이미지를 decode하고 진단 도구 호출 |
+| Vision execution | 병해·해충 모델을 비동기로 함께 호출, 성공한 분기 보존 |
+| Candidate interpretation | 작물 필터·중복 제거·경쟁 후보/낮은 신뢰 처리 |
+| Structured evidence | 작물·병해충 표준명으로 공식 등록정보 검색과 연결 |
+| LLM context | 진단 근거를 검색 문맥에 넣어 기존 상담 생성·검증 경로 사용 |
+| Result UI | 최종 SSE의 vision 데이터로 사진 진단 카드 표시 |
 
-`interpret(candidates, service_status, threshold, margin)`는 in-process 함수입니다.
-유효하지 않은 입력은 ValueError, 서비스 실패는 service_error로 구분합니다.
-이를 실제 API에 연결할 때는 인증, 이미지 크기·형식 검증, timeout, 모델 revision,
-전문가 확인 경로가 별도로 필요합니다. 설명 생성기는 현재 template입니다.
+사진 진단 카드는 **이미지에서 본 후보와 신뢰 수준**을 표시합니다.
+등록 약제·희석배수·사용시기·안전사용기준은 답변 본문의 공식 검색 근거에서 설명합니다.
+[코드 연결 근거와 오류 처리](docs/actual-engineering.md).
 
-## Evaluation
+## System Strengths
 
-20개 테스트는 malformed score, NaN/Infinity, 낮은 점수, 모호성, 미등록 지식,
-중복 관측, 서비스 실패와 저장된 실행 문서의 재계산 일치를 확인합니다.
-검출 mAP·진단 정확도·현장 성능 숫자는 측정하지 않았으므로 제시하지 않습니다.
+| Decision | 구현 효과 |
+|---|---|
+| Model as tool | Vision을 상담 전체와 분리해 교체·실패 처리 가능 |
+| Taxonomy alignment | 모델 라벨을 도메인 검색에 사용하는 표준 개념으로 연결 |
+| Evidence separation | 시각적 유사도와 공식 등록정보의 근거 범위를 분리 |
+| Failure-aware execution | 서비스 오류, 빈 검출, 모호한 후보를 서로 다른 상태로 전달 |
+| Domain response composition | 이미지 관찰 결과와 검색 근거를 상담 파이프라인에서 결합 |
 
-[평가](docs/evaluation.md) · [설계 결정](docs/design-decisions.md) ·
-[한계](docs/limitations.md) · [검증 기록](docs/validation.md).
+QLoRA VLM 학습·서빙 경로와 현재 YOLO 기반 상담 진단 경로는 별개입니다.
+학습 lifecycle은 [Fine-tuning Lab](https://github.com/YeongjoonKim/efficient-finetuning-lab)에서 다룹니다.
+
+## Public Reference Implementation & Lightweight Demo
+
+| 구분 | 범위 |
+|---|---|
+| Actual Engineering Experience | 실제 이미지·YOLO·도메인 DB·상담·결과 카드 통합 |
+| Public Reference Implementation | 후보 계약·불확실성·근거 일치·오류 상태를 독립 코드로 재구성 |
+| Public Lightweight Demo | 합성 detector metadata + 가상 지식 + 템플릿 응답 |
+
+[실행 artifact](examples/execution.json) · [화면 갤러리](docs/screenshots.md)에서
+candidate / ambiguous / service_error / knowledge_missing 분기를 확인할 수 있습니다.
+20개 테스트는 finite score, 후보 중복, 근거 누락, 서비스 오류와 snapshot을 검증합니다.
 
 ## Reproduce
-
-Python 3.10+ 표준 라이브러리. 기본 실행에서 모델 다운로드와 GPU 사용이 없습니다.
 
 ```sh
 python3 -m src.vision_demo
@@ -85,18 +87,14 @@ python3 -m unittest discover -s tests -v
 python3 scripts/check_repository.py
 ```
 
-`src/`: 후보/근거 해석, `examples/`: 실행 결과, `tests/`: 회귀,
-`docs/`: architecture와 검토 화면, `.github/`: CI.
+## Scope & Limitations
 
-## Limitation / Research Relevance
+현재 공개 실행 코드는 metadata 이후의 계약을 검토하는 경량 예제입니다.
+실제 모델 가중치·운영 DB·회사 소스는 포함하지 않습니다.
+높은 detector score는 확정 진단이나 교정된 정확도를 뜻하지 않으며 빈 검출은 건강함의 증거가 아닙니다.
+이번 실제 화면 검증은 두 이미지의 CPU 기능 확인이며 상담 전체의 새 end-to-end 정확도 평가는 별도 과제입니다.
+독립 holdout, OOD, calibration과 최종 권고의 근거 일치를 나누어 평가할 계획입니다.
 
-실제 detector와 전문 지식의 연결은 별도 검증이 필요합니다. 높은 score가 정확한 진단을
-보장하지 않으며 no_observation도 건강함의 증거가 아닙니다.
-라이선스가 확인된 이미지, out-of-distribution 사례, calibration, 사람의 확인을 포함해
-candidate 수준과 최종 답변 수준의 오류를 따로 평가하는 것이 다음 단계입니다.
-
-MY CONTRIBUTION: 시각 도구·지식·상담 통합 경험.
-PLATFORM CONTEXT: 비공개 플랫폼. PUBLIC RECONSTRUCTION: 합성 metadata 계약.
-FUTURE RESEARCH: 실제 모델과 다중모달 grounding 평가.
-
-[공개 경계](PUBLICATION.md) · [License notice](LICENSE-NOTICE.md) · [Security](SECURITY.md).
+[상세 근거](docs/actual-engineering.md) · [평가](docs/evaluation.md) ·
+[검증 기록](docs/validation.md) · [공개 경계](PUBLICATION.md) ·
+[License notice](LICENSE-NOTICE.md) · [Security](SECURITY.md).

@@ -1,8 +1,10 @@
 {
-  "origin": "browser_capture_of_public_reconstruction_only",
-  "viewport_width": 1100,
+  "origin": "reviewed_operational_derivatives_and_public_execution_captures",
   "files": {
+    "docs/screenshots/boundary.png": "8efadc261fb53400fe3cd8b7b40fc8ac9e3b7be8953cf75655f511ade8ff535e",
     "docs/screenshots/candidate.png": "2d84d8922bc285e47a8dbe4ae31683c3c78c8160de7d4cf8f2a95f8da7cd9532",
-    "docs/screenshots/boundary.png": "8efadc261fb53400fe3cd8b7b40fc8ac9e3b7be8953cf75655f511ade8ff535e"
-  }
+    "docs/screenshots/vision-cpu-result.png": "e322b77a2e7561ba6602f2a9b21a9245bbf6228bda11b5cb803d2e3117ebce3e",
+    "docs/screenshots/yolo-training-progress.png": "a2ae12c2f1b92cb5fc3dc2647db88196c41f62a9773943bb483db2def3bd7f52"
+  },
+  "policy": "Owner-approved local opaque masking/crops. Actual engineering captures are separate from public synthetic examples. Originals preserved privately."
 }
