@@ -10,7 +10,7 @@
 
 학습 화면은 진행 기록이며, CPU 추론 화면은 다른 active run의 결과입니다.
 오이 노균병 라벨과 다른 후보가 나온 관측을 진단 성공으로 바꾸지 않았습니다.
-Purpose / What this demonstrates / Architecture relation은 README의 각 화면에 기재했습니다.
+목적 / 이 화면이 보여주는 것 / 아키텍처 연결은 README의 각 화면에 기재했습니다.
 
 ## Public Lightweight Demo
 

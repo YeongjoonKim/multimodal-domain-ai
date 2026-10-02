@@ -1,5 +1,11 @@
 # Changelog — Uncertain Vision Tool Integration
 
+## 2026-10-02 — Technical portfolio polish
+
+- Model & Integration Facts에서 학습 run과 active inference 경로를 구분했다.
+- 상담 연결·학습·추론·설계 강점 다음에 Failure Analysis를 배치했다.
+- 화면과 구현은 유지하고 상세 평가 조건을 문서로 분리했다.
+
 ## 2026-10-02 — Portfolio hardening
 
 - 실제 상담 화면을 보존하고 Observed Failure Case를 명시했다. 높은 confidence를 확정 진단으로 바꾸지 않으며 mAP/진단 정확도 수치를 새로 만들지 않았다.
