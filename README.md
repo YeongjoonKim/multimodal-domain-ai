@@ -13,6 +13,19 @@
 Image Input → Disease / Pest Inference → Taxonomy Mapping → Structured Knowledge
 → Evidence Context → LLM Consultation → SSE → Diagnosis Card / Answer.
 
+## Actual Consultation Experience
+
+**Purpose** — 사용자가 작물 사진을 첨부하고 질문하면, 상담 화면에서 증상 설명과 단계별 대응 내용을 읽는 실제 사용 흐름을 보여줍니다.
+
+![실제 상담 화면: 딸기 사진 첨부와 질문, 증상 설명 및 단계별 대응 답변](docs/screenshots/consultation-strawberry.png)
+
+**What this demonstrates** — 사용자가 제공한 실제 상담 화면의 사진 첨부, 질문 말풍선,
+핵심 진단·발생 조건, 즉시 조치·단기 개선·장기 예방, 약제 정보 표시 구간입니다.
+원문을 재작성하지 않고 해당 사진 질문과 답변 구간을 발췌했습니다.
+**Architecture relation** — Image + Question → Consultation Response → User-facing Markdown.
+
+[앞선 턴을 포함한 화면과 검토 범위](docs/consultation-evidence.md).
+
 ## Actual YOLO Training
 
 **Purpose** — 이미지 진단 모델의 학습 진행과 자원 상태를 확인합니다.
@@ -95,6 +108,8 @@ python3 scripts/check_repository.py
 실제 모델 가중치·운영 DB·회사 소스는 포함하지 않습니다.
 높은 detector score는 확정 진단이나 교정된 정확도를 뜻하지 않으며 빈 검출은 건강함의 증거가 아닙니다.
 이번 실제 화면 검증은 두 이미지의 CPU 기능 확인이며 상담 전체의 새 end-to-end 정확도 평가는 별도 과제입니다.
+추가한 사용자 제공 상담 캡처는 실제 화면 흐름의 증거이며 독립 재실행 결과는 아닙니다.
+본문의 확정적 진단 표현·약제 수치·살포 간격은 이 캡처만으로 현행 등록 DB와의 일치를 검증할 수 없습니다.
 독립 holdout, OOD, calibration과 최종 권고의 근거 일치를 나누어 평가할 계획입니다.
 
 [상세 근거](docs/actual-engineering.md) · [평가](docs/evaluation.md) ·

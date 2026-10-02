@@ -1,6 +1,8 @@
 {
   "origin": "reviewed_operational_derivatives_and_public_execution_captures",
   "files": {
+    "docs/screenshots/consultation-strawberry.png": "a11965a66c381dd51e3b1beccf292d074270002ae838330eb2bdea6ee58045e5",
+    "docs/screenshots/consultation-context.png": "2ba3df1f7eaa41a4eb39022c458c56a23e62c26597e299de91d7502c8091c549",
     "docs/screenshots/boundary.png": "8efadc261fb53400fe3cd8b7b40fc8ac9e3b7be8953cf75655f511ade8ff535e",
     "docs/screenshots/candidate.png": "2d84d8922bc285e47a8dbe4ae31683c3c78c8160de7d4cf8f2a95f8da7cd9532",
     "docs/screenshots/vision-cpu-result.png": "e322b77a2e7561ba6602f2a9b21a9245bbf6228bda11b5cb803d2e3117ebce3e",
