@@ -36,41 +36,34 @@ Diagnosis Card / Answer ← SSE ← LLM Consultation ← Structured Evidence
 
 ## 상담 연결 — Consultation Integration
 
-**목적** — 사진과 질문을 제출하고 증상 설명·단계별 대응을 확인하는 사용자 흐름을 보여줍니다.
-
 ![딸기 사진 첨부와 질문, 증상 설명 및 단계별 대응 답변](docs/screenshots/consultation-strawberry.png)
 
-**이 화면이 보여주는 것** — 실제 상담 UI 캡처의 사진 첨부, 질문 말풍선,
-핵심 진단·발생 조건, 즉시 조치·단기 개선·장기 예방, 약제 정보 표시 구간.
-**아키텍처 연결** — Image + Question → Consultation Response → User-facing Markdown.
+사진과 질문을 제출하면 증상 설명과 즉시 조치·단기 개선·장기 예방을 문단·목록으로 확인합니다.
+캡처에는 약제 정보가 표시되는 답변 구간도 포함돼 있습니다.
 
 [턴별 카드 연결과 답변 검증 범위](docs/consultation-evidence.md).
 
 사진 진단 카드는 **이미지에서 본 후보와 신뢰 수준**을 표시합니다.
 등록 약제·희석배수·사용시기·안전사용기준은 답변 본문의 공식 검색 근거에서 설명합니다.
+이 검색·상담 연결은 구현돼 있습니다. 다만 공개 캡처의 개별 약제명·수치가 현재 등록 행과
+일치하는지 확인하는 작업은 별도의 답변 검증 범위입니다.
 
 ## YOLO 학습 — Training Monitoring
 
-**목적** — 이미지 진단 모델의 학습 진행과 자원 상태를 확인합니다.
-
 ![YOLO26-X 학습 진행 화면](docs/screenshots/yolo-training-progress.png)
 
-**이 화면이 보여주는 것** — YOLO26-X 학습의 epoch, mAP, precision/recall,
-loss 그래프, 로그와 4개 GPU 상태. 학습 중간의 epoch 75/100 화면입니다.
-**아키텍처 연결** — Dataset → Detector Training → Model Selection.
+YOLO26-X의 epoch, mAP, precision/recall, loss와 4개 GPU 상태를 모니터링합니다.
+이 화면은 학습 중간인 epoch 75/100 기록입니다.
 
 이 학습 run과 아래 CPU 추론에 적용된 active run은 별도로 관리합니다.
 
 ## 이미지 추론 — Vision Execution
 
-**목적** — 적용 중인 모델로 이미지 한 장을 추론하고 도메인 매핑 결과를 확인합니다.
-
 ![CPU Vision 추론과 도메인 매핑 결과](docs/screenshots/vision-cpu-result.png)
 
-**이 화면이 보여주는 것** — 관리자 추론 테스트의 입력 이미지, 검출 후보·score,
-모델 식별자, CPU 처리 시간과 공식 병해충 명칭 연결.
+관리자 추론 테스트에서 입력 이미지, 검출 후보·score, 모델 식별자,
+CPU 처리 시간과 공식 병해충 명칭 연결을 함께 조회합니다.
 아래 [실패 분석](#실패-분석--failure-analysis)의 라벨 불일치 사례를 보여줍니다.
-**아키텍처 연결** — Image → Model as Tool → Candidate / Domain Mapping.
 
 ## 시스템 설계의 강점
 
