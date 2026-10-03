@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/YeongjoonKim/multimodal-domain-ai/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/YeongjoonKim/multimodal-domain-ai/actions/workflows/ci.yml)
 
-## 실제 구현 경험
+## 실제 구현
 
 상담에 첨부된 이미지를 병해·해충 YOLO 도구로 분석하고, 작물·병해충 표준명과
 공식 등록정보 검색을 거쳐 상담 근거로 전달하는 파이프라인을 구현했습니다.
