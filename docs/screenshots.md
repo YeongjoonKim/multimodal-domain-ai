@@ -21,3 +21,10 @@
 - [불확실성](screenshots/boundary.png): 모호한 후보·도구 실패·지식 부재 분리.
 
 [캡처 hash](screenshots/manifest.json)는 검토한 공개 이미지 파일을 식별합니다.
+
+## Execution management · 2026-10-03
+
+- [활성 Vision 모델·변환·적용](screenshots/vision-model-deployment.png)
+
+현재 UI를 격리된 조회 전용 브라우저에서 촬영했습니다. 모델·서비스·데이터 변경 동작은 실행하지 않았습니다.
+상태·수치·실패 표시는 유지하고 공개에 불필요한 식별자를 일반화했습니다. 시간대는 Asia/Seoul입니다.

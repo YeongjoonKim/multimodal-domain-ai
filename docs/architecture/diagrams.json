@@ -1,0 +1,112 @@
+[
+  {
+    "file": "01_multimodal_architecture",
+    "title": "Vision lifecycle and consultation",
+    "scope": "Implemented YOLO service path and independent public contracts",
+    "lanes": [
+      {
+        "title": "TRAIN AND SERVE",
+        "nodes": [
+          {
+            "title": "Dataset / taxonomy",
+            "lines": [
+              "Reviewed label mapping",
+              "Build train / val / test"
+            ]
+          },
+          {
+            "title": "Host training runner",
+            "lines": [
+              "GPU DDP training",
+              "Run logs / checkpoints"
+            ]
+          },
+          {
+            "title": "Export and activate",
+            "lines": [
+              "ONNX / OpenVINO",
+              "Versioned active selection"
+            ]
+          },
+          {
+            "title": "CPU inference service",
+            "lines": [
+              "Disease / pest models",
+              "Independent from vLLM"
+            ]
+          }
+        ],
+        "serial": true
+      },
+      {
+        "title": "CONSULTATION",
+        "nodes": [
+          {
+            "title": "Image + question",
+            "lines": [
+              "Request / message scope",
+              "Optional crop context"
+            ]
+          },
+          {
+            "title": "Candidates + mapping",
+            "lines": [
+              "Uncertainty / tool errors",
+              "Domain crop / disease"
+            ]
+          },
+          {
+            "title": "Official evidence",
+            "lines": [
+              "Registration lookup",
+              "Answer generation / checks"
+            ]
+          },
+          {
+            "title": "SSE + response",
+            "lines": [
+              "Per-message diagnosis card",
+              "Evidence-backed explanation"
+            ]
+          }
+        ],
+        "serial": true
+      },
+      {
+        "title": "PUBLIC CONTRACT EXAMPLE",
+        "nodes": [
+          {
+            "title": "Synthetic metadata",
+            "lines": [
+              "Fictional candidates",
+              "No detector weights"
+            ]
+          },
+          {
+            "title": "Candidate gate",
+            "lines": [
+              "Empty / error / ambiguous",
+              "Preserve branch status"
+            ]
+          },
+          {
+            "title": "Knowledge contract",
+            "lines": [
+              "Fictional domain records",
+              "Source / scope checks"
+            ]
+          },
+          {
+            "title": "Template response",
+            "lines": [
+              "Grounded sample output",
+              "Snapshot / regression"
+            ]
+          }
+        ],
+        "serial": true
+      }
+    ],
+    "note": "A training run and the active inference model have independent identities and lifecycle states."
+  }
+]

@@ -24,7 +24,7 @@ Diagnosis Card / Answer ← SSE ← LLM Consultation ← Structured Evidence
 | Model Family | 병해·해충 YOLO 모델을 독립 도구로 구성 |
 | Training Evidence | YOLO26-X 병해 모델 학습 run의 지표·로그·GPU 모니터링 |
 | Training Dataset | disease_v3 · 78 classes · train 165,468 images |
-| Training State | 학습 증거 화면: epoch 75/100 진행 상태 |
+| Training Evidence Scope | disease_v3 학습 run의 지표·checkpoint; 아래 학습 캡처는 75/100 시점 |
 | Current Inference | CPU Vision inference service; 학습 증거 화면과는 별도 active run |
 | Taxonomy | 모델 label→작물·NCPMS 병해충 표준명 매핑 |
 | Evidence Integration | 작물·병해충이 식별되면 공식 등록정보를 조회해 상담 문맥에 결합 |
@@ -33,6 +33,8 @@ Diagnosis Card / Answer ← SSE ← LLM Consultation ← Structured Evidence
 | Failure Handling | 분기별 성공 결과 유지, 빈 검출·모호한 후보·서비스 오류 구분 |
 
 [모델·학습 run·상담 연결의 상세 근거](docs/actual-engineering.md).
+
+![학습·활성 모델·상담 연결과 공개 예제의 현재 구성](docs/architecture/01_multimodal_architecture.svg)
 
 ## 상담 연결 — Consultation Integration
 
@@ -56,6 +58,15 @@ YOLO26-X의 epoch, mAP, precision/recall, loss와 4개 GPU 상태를 모니터�
 이 화면은 학습 중간인 epoch 75/100 기록입니다.
 
 이 학습 run과 아래 CPU 추론에 적용된 active run은 별도로 관리합니다.
+
+## 모델 변환·배포 — Model Lifecycle
+
+![활성 모델과 checkpoint 변환·적용 관리](docs/screenshots/vision-model-deployment.png)
+
+관리자에서 병해·해충별 활성 모델과 checkpoint의 ONNX/OpenVINO 변환 상태를 확인합니다.
+GPU 학습과 CPU 추론은 별도 서비스이며, 새 학습 run을 선택해도 활성 모델은 자동으로 바뀌지 않습니다.
+배포 화면은 2026-10-03 촬영 기록이며, 상단의 활성 모델과 하단의 v3 checkpoint 선택 영역을 구분해 보여줍니다.
+[API·호스트 작업 큐·활성 모델 연결](docs/model-lifecycle.md).
 
 ## 이미지 추론 — Vision Execution
 
@@ -91,9 +102,7 @@ CPU 추론에서 오이 노균병 라벨 이미지에 정상·토마토 잎곰�
 
 ## 공개 구현 범위
 
-아래 도식은 Vision 결과 이후의 metadata·근거 연결을 재현하는 공개 예제의 구조입니다.
-
-![Public multimodal reference architecture](docs/architecture/01_multimodal_architecture.svg)
+상단 아키텍처의 PUBLIC CONTRACT EXAMPLE lane은 Vision 결과 이후의 metadata·근거 연결을 재현합니다.
 
 | 구분 | 범위 |
 |---|---|
