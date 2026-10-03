@@ -129,7 +129,7 @@ python3 scripts/check_repository.py
 ## 현재 범위와 한계
 
 공개 코드는 Vision 결과 이후의 계약과 근거 연결 구조를 재현한 경량 예제입니다.
-높은 Detection Score나 빈 검출만으로 확정 진단·건강함을 판정하지 않습니다.
+높은 Detection Score나 빈 검출만으로 확정 진단·강인함을 판정하지 않습니다.
 독립 Holdout/OOD/Calibration 평가와 Vision 후보부터 최종 권고 근거까지의 일관성 검증이 후속 과제입니다.
 상담 캡처의 처방 수치는 [공식 등록 행과의 대조가 필요한 항목](docs/consultation-evidence.md#턴-경계와-판정-범위)으로 관리합니다.
 
